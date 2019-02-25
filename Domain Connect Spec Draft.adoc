@@ -165,11 +165,10 @@ coordination and agreement between both parties. A Service Provider is free to d
 and publish a template. A DNS Provider can be selective in what templates they support, 
 can require a contractual relationship, or even charge a fee for onboarding.
 
-A Service Provider can be selective in which DNS Providers they accept. One way to do 
-this is by using a whitelist of providerIDs to onboard each DNS Provider when the 
-Service Provider is ready to trust the DNS Provider. The providerID is an arbitrary 
-string with no validation provided by the DNS Provider when used for whitelisting 
-by the Service Provider.
+A Service Provider can be selective in which DNS Providers they accept by using a 
+whitelist. The Service Provider must whitelist the providerID to onboard each DNS 
+Provider when the Service Provider is ready to trust the DNS Provider. The providerID 
+is an arbitrary string with no validation provided by the DNS Provider.
 
 == Protocol Overview and End User Flows
 
