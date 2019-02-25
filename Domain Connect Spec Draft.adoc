@@ -160,11 +160,16 @@ This specification is an open standard that describes the protocol, messages and
 used to enable Domain Connect between a Service Provider and a DNS 
 Provider. 
 
-As such any Service Provider is free to define and publish a template. However, the terms 
-and conditions for a DNS Provider onboarding a Service Provider
-template is beyond the scope of this document. A DNS Provider can
-be selective in what templates they support, can require a contractual 
-relationship, or even charge a fee for onboarding. 
+As such the relationship between a Service Provider and a DNS Provider may require 
+coordination and agreement between both parties. A Service Provider is free to define 
+and publish a template. A DNS Provider can be selective in what templates they support, 
+can require a contractual relationship, or even charge a fee for onboarding.
+
+A Service Provider can be selective in which DNS Providers they accept. One way to do 
+this is by using a whitelist of providerIDs to onboard each DNS Provider when the 
+Service Provider is ready to trust the DNS Provider. The providerID is an arbitrary 
+string with no validation provided by the DNS Provider when used for whitelisting 
+by the Service Provider.
 
 == Protocol Overview and End User Flows
 
@@ -301,7 +306,8 @@ https://{_domainconnect}/v2/{domain}/settings
 
 This will return a JSON structure containing the settings to use for
 Domain Connect on the domain name (passed in on the path) at the DNS
-Provider. This JSON structure will contain the following fields.
+Provider. The keys in this JSON structure must be interpreted as case 
+insensitive. This JSON structure will contain the following fields.
 
 [cols=",,,",options="header",]
 |=======================================================================
@@ -402,7 +408,7 @@ _domainconnect TXT record suceeds, but a call to query for the JSON fails.
 This can happen if the zone is hosted with another provider, but contains an 
 incorrect _domainconnect TXT record.
 
-The DNS Provider should return a 404 if they do not contain the zone.  
+The DNS Provider must return a 404 if they do not contain the zone.  
 
 [cols=",,",options="header",]
 |=======================================================================
@@ -522,6 +528,7 @@ application of the template (or cancellation by the user), the DNS
 Provider would redirect the browser to a return URL (redirect_uri).
 
 Several parameters may be appended to the end of this redirect_uri.
+The use of these request paremeters must be case insensitive. 
 
 * State
 +
@@ -573,7 +580,7 @@ succesfully applied.
 [cols=",,",options="header",]
 |=======================================================================
 |Property 
-|Key 
+|Request Parameter 
 |Description
 
 |*Domain*
